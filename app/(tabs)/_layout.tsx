@@ -2,7 +2,8 @@ import { Tabs } from "expo-router";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import HomeIcon from "@/components/navigation/HomeIcon";
+import SearchIcon from "@/components/navigation/SearchIcon";
 import { Colors } from "@/constants/Colors";
 
 export default function TabLayout() {
@@ -11,31 +12,33 @@ export default function TabLayout() {
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors.tabIconSelected,
+          tabBarInactiveTintColor: Colors.tabIconDefault,
           headerShown: false,
+          tabBarStyle: {
+            backgroundColor: Colors.accent,
+            height: 72,
+            paddingTop: 8,
+          },
+          tabBarLabelStyle: {
+            fontFamily: "Poppins",
+            fontSize: 16,
+            lineHeight: 24,
+            paddingBottom: 6,
+          },
         }}
       >
         <Tabs.Screen
           name="home"
           options={{
             title: "Home",
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "home" : "home-outline"}
-                color={color}
-              />
-            ),
+            tabBarIcon: ({ focused }) => <HomeIcon focused={focused} />,
           }}
         />
         <Tabs.Screen
           name="search"
           options={{
             title: "Search",
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? "search" : "search-outline"}
-                color={color}
-              />
-            ),
+            tabBarIcon: ({ focused }) => <SearchIcon focused={focused} />,
           }}
         />
       </Tabs>
