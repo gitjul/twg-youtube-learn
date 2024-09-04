@@ -1,0 +1,44 @@
+import { Tabs } from "expo-router";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import { Colors } from "@/constants/Colors";
+
+export default function TabLayout() {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: Colors.tabIconSelected,
+          headerShown: false,
+        }}
+      >
+        <Tabs.Screen
+          name="home"
+          options={{
+            title: "Home",
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "home" : "home-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="search"
+          options={{
+            title: "Search",
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "search" : "search-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
+      </Tabs>
+    </SafeAreaView>
+  );
+}

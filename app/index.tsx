@@ -1,6 +1,7 @@
-import { Text, View } from "react-native";
+import { Text, View, Pressable } from "react-native";
+import { Link } from "expo-router";
 
-export default function Index() {
+export default function Login() {
   return (
     <View
       style={{
@@ -9,7 +10,11 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Link href="/(tabs)/home" asChild>
+        <Pressable>
+          <Text>Log in as guest</Text>
+        </Pressable>
+      </Link>
     </View>
   );
 }
