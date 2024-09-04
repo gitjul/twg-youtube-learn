@@ -22,7 +22,7 @@ export default function Index() {
         accessibilityLabel={"App icon"}
       />
       <View>
-        <Text style={styles.text}>
+        <Text style={styles.welcomeText}>
           Welcome to the best YouTube-based learning application.
         </Text>
         <Link href="/(tabs)/home" asChild>
@@ -65,30 +65,38 @@ const styles = StyleSheet.create({
     marginVertical: 50,
     marginHorizontal: "auto",
   },
-  text: {
+  welcomeText: {
     color: "#fff",
+    fontFamily: "PoppinsSemiBold",
     fontSize: 22,
-  },
-  link: {
-    color: Colors.text,
-    textDecorationLine: "underline",
+    lineHeight: 24,
+    marginBottom: 30,
   },
   button: {
     backgroundColor: Colors.button,
     borderRadius: 12,
     paddingTop: 14,
     paddingBottom: 10,
-    marginVertical: 20,
+    marginBottom: 25,
   },
   buttonText: {
     color: Colors.buttonText,
     fontSize: 16,
+    fontFamily: "PoppinsSemiBold",
+    lineHeight: 24,
     textAlign: "center",
   },
   disclaimerText: {
     color: "#fff",
+    fontFamily: "Poppins",
     fontSize: 13,
+    lineHeight: 16,
     marginBottom: 20,
     textAlign: "center",
+  },
+  link: {
+    color: Colors.text,
+    fontFamily: "Poppins",
+    textDecorationLine: "underline",
   },
 });
