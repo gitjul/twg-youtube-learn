@@ -1,8 +1,8 @@
-import * as Linking from "expo-linking";
 import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Colors } from "@/constants/Colors";
+import { ExternalLink } from "@/components/ExternalLink";
 
 export default function Index() {
   return (
@@ -32,19 +32,13 @@ export default function Index() {
         </Link>
         <Text style={styles.disclaimerText}>
           By continuing you agree with{"\n"}
-          <Text
-            onPress={() => Linking.openURL("https://example.com")}
-            style={styles.link}
-          >
-            <Text>Terms and Conditions</Text>{" "}
-          </Text>
+          <ExternalLink href="https://example.com" style={styles.link}>
+            Terms and Conditions{" "}
+          </ExternalLink>
           and{" "}
-          <Text
-            onPress={() => Linking.openURL("https://example.com")}
-            style={styles.link}
-          >
+          <ExternalLink href="https://example.com" style={styles.link}>
             Privacy Policy
-          </Text>
+          </ExternalLink>
         </Text>
       </View>
     </View>
