@@ -1,17 +1,17 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
   Image,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 
 import { Colors } from "@/constants/Colors";
+import SearchInput from "@/components/SearchInput";
 
 interface Video {
   id: {
@@ -31,7 +31,7 @@ interface Video {
 
 const YOUTUBE_API_KEY = "AIzaSyBQ8xv6aATWBoLw-uObo3EW6GSoXonK8FQ";
 
-const SearchInput: React.FC = () => {
+const Search: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -85,12 +85,8 @@ const SearchInput: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={searchQuery}
-        placeholder="Search Videos"
-        onChangeText={handleSearch}
-      />
+      <SearchInput searchQuery={searchQuery} handleSearch={handleSearch} />
+
       {loading ? (
         <ActivityIndicator size="large" color={Colors.accent} />
       ) : (
@@ -155,4 +151,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchInput;
+export default Search;
