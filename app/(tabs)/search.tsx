@@ -11,9 +11,10 @@ import {
 } from "react-native";
 import { useDebounce } from "use-debounce";
 
-import { Colors } from "@/constants/Colors";
 import SearchInput from "@/components/SearchInput";
+import { Colors } from "@/constants/Colors";
 import { YOUTUBE_API_KEY } from "@env";
+import { formattedDate } from "@/helpers";
 
 interface Video {
   id: {
@@ -70,12 +71,6 @@ const Search: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const formattedDate = (date: Date) => {
-    const dateObj = new Date(date);
-
-    return `${dateObj.getDate()}.${dateObj.getMonth()}.${dateObj.getFullYear()}`;
   };
 
   const renderItem = ({ item }: { item: Video }) => (
