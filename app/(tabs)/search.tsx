@@ -46,7 +46,7 @@ const Search: React.FC = () => {
         {
           params: {
             part: "snippet",
-            maxResults: 50,
+            maxResults: 15,
             q: query,
             key: YOUTUBE_API_KEY,
             type: "video",
