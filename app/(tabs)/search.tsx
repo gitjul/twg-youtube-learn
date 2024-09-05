@@ -25,6 +25,7 @@ interface Video {
         url: string;
       };
     };
+    publishedAt: Date;
   };
 }
 
@@ -60,6 +61,12 @@ const SearchInput: React.FC = () => {
     }
   };
 
+  const formattedDate = (date: Date) => {
+    const dateObj = new Date(date);
+
+    return `${dateObj.getDate()}.${dateObj.getMonth()}.${dateObj.getFullYear()}`;
+  };
+
   const renderItem = ({ item }: { item: Video }) => (
     <TouchableOpacity style={styles.videoItem}>
       <Image
@@ -69,6 +76,9 @@ const SearchInput: React.FC = () => {
       <View style={styles.videoInfo}>
         <Text style={styles.title}>{item.snippet.title}</Text>
         <Text style={styles.description}>{item.snippet.description}</Text>
+        <Text style={styles.date}>
+          {formattedDate(item.snippet.publishedAt)}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -110,7 +120,7 @@ const styles = StyleSheet.create({
   },
   videoItem: {
     flexDirection: "column",
-    marginBottom: 20,
+    marginBottom: 15,
   },
   thumbnail: {
     width: "100%",
@@ -133,8 +143,15 @@ const styles = StyleSheet.create({
     color: Colors.text,
     fontSize: 15,
     fontFamily: "Poppins",
-    lineHeight: 12,
+    lineHeight: 14, // 12 in mockups but some letters overlapped with that value set
     paddingTop: 10,
+  },
+  date: {
+    alignSelf: "flex-end",
+    fontFamily: "Poppins",
+    fontSize: 10,
+    lineHeight: 24,
+    marginTop: 6,
   },
 });
 
