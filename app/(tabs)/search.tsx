@@ -12,6 +12,7 @@ import {
 
 import { Colors } from "@/constants/Colors";
 import SearchInput from "@/components/SearchInput";
+import { YOUTUBE_API_KEY } from "@env";
 
 interface Video {
   id: {
@@ -28,8 +29,6 @@ interface Video {
     publishedAt: Date;
   };
 }
-
-const YOUTUBE_API_KEY = "AIzaSyBQ8xv6aATWBoLw-uObo3EW6GSoXonK8FQ";
 
 const Search: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
