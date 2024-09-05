@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -11,25 +10,10 @@ import {
 } from "react-native";
 import { useDebounce } from "use-debounce";
 
-import { Colors } from "@/constants/Colors";
+import { Video, fetchVideos } from "@/api";
 import SearchInput from "@/components/SearchInput";
-import { YOUTUBE_API_KEY } from "@env";
-
-interface Video {
-  id: {
-    videoId: string;
-  };
-  snippet: {
-    title: string;
-    description: string;
-    thumbnails: {
-      medium: {
-        url: string;
-      };
-    };
-    publishedAt: Date;
-  };
-}
+import { Colors } from "@/constants/Colors";
+import { formattedDate } from "@/helpers";
 
 const Search: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -42,41 +26,16 @@ const Search: React.FC = () => {
   // Fetch videos whenever the debounced query changes
   useEffect(() => {
     if (debouncedQuery.length >= 3) {
-      fetchVideos(debouncedQuery);
+      fetchVideos({
+        query: debouncedQuery,
+        maxResults: 40,
+        setLoading: setLoading,
+        setVideos: setVideos,
+      });
     } else {
       setVideos([]); // Clear videos if the query is too short
     }
   }, [debouncedQuery]);
-
-  const fetchVideos = async (query: string) => {
-    setLoading(true);
-
-    try {
-      const response = await axios.get(
-        "https://www.googleapis.com/youtube/v3/search",
-        {
-          params: {
-            part: "snippet",
-            maxResults: 15,
-            q: query,
-            key: YOUTUBE_API_KEY,
-            type: "video",
-          },
-        }
-      );
-      setVideos(response.data.items);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formattedDate = (date: Date) => {
-    const dateObj = new Date(date);
-
-    return `${dateObj.getDate()}.${dateObj.getMonth()}.${dateObj.getFullYear()}`;
-  };
 
   const renderItem = ({ item }: { item: Video }) => (
     <TouchableOpacity style={styles.videoItem}>
