@@ -1,11 +1,12 @@
-import { Colors } from "@/constants/Colors";
+import { Dispatch, SetStateAction } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 import SearchIcon from "@/components/navigation/SearchIcon";
+import { Colors } from "@/constants/Colors";
 
 interface SearchProps {
   searchQuery: string;
-  handleSearch: (query: string) => Promise<void>;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
 const SearchInput = (props: SearchProps) => {
@@ -18,7 +19,7 @@ const SearchInput = (props: SearchProps) => {
         style={styles.input}
         value={props.searchQuery}
         placeholder="Search Videos"
-        onChangeText={props.handleSearch}
+        onChangeText={props.setSearchQuery}
         placeholderTextColor="rgba(43, 45, 66, 0.6)"
       />
     </View>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDebounce } from "use-debounce";
 
 import { Colors } from "@/constants/Colors";
 import SearchInput from "@/components/SearchInput";
@@ -35,10 +36,21 @@ const Search: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query);
-    if (query.length < 3) return; // Only search when the query is at least 3 characters
+  // Debounced query to avoid sending too many requests
+  const [debouncedQuery] = useDebounce(searchQuery, 500);
+
+  // Fetch videos whenever the debounced query changes
+  useEffect(() => {
+    if (debouncedQuery.length >= 3) {
+      fetchVideos(debouncedQuery);
+    } else {
+      setVideos([]); // Clear videos if the query is too short
+    }
+  }, [debouncedQuery]);
+
+  const fetchVideos = async (query: string) => {
     setLoading(true);
+
     try {
       const response = await axios.get(
         "https://www.googleapis.com/youtube/v3/search",
@@ -84,7 +96,7 @@ const Search: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <SearchInput searchQuery={searchQuery} handleSearch={handleSearch} />
+      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       {loading ? (
         <ActivityIndicator size="large" color={Colors.accent} />
