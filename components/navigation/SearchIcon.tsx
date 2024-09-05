@@ -1,21 +1,20 @@
 import Svg, { SvgProps, Path } from "react-native-svg";
 
-import { Colors } from "@/constants/Colors";
-
 type IconProps = SvgProps & {
-  focused: boolean;
+  color: string;
 };
 
 const SearchIcon = (props: IconProps) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={32}
-    height={32}
+    width={props.width}
+    height={props.height}
+    viewBox={`0 0 32 32`}
     fill="none"
     {...props}
   >
     <Path
-      stroke={props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+      stroke={props.color}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
