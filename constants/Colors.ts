@@ -12,6 +12,6 @@ export const Colors = {
   buttonText: "#fff",
   accent: accent,
   icon: dark,
-  tabIconDefault: dark,
-  tabIconSelected: "#fff",
+  tabIconDefault: "#fff",
+  tabIconSelected: dark,
 };
