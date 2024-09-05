@@ -20,6 +20,7 @@ export interface Video {
 
 interface Params {
   query: string;
+  maxResults: number;
   setLoading: Dispatch<SetStateAction<boolean>>;
   setVideos: Dispatch<SetStateAction<Video[]>>;
 }
@@ -33,7 +34,7 @@ export const fetchVideos = async (params: Params) => {
       {
         params: {
           part: "snippet",
-          maxResults: 15,
+          maxResults: params.maxResults,
           q: params.query,
           key: YOUTUBE_API_KEY,
           type: "video",

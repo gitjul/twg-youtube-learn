@@ -28,6 +28,7 @@ const Search: React.FC = () => {
     if (debouncedQuery.length >= 3) {
       fetchVideos({
         query: debouncedQuery,
+        maxResults: 40,
         setLoading: setLoading,
         setVideos: setVideos,
       });
